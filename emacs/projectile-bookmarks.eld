@@ -1,0 +1,1 @@
+("~/projects/emacs-tmux-config/" "~/projects/test-git/")

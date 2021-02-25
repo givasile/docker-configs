@@ -1,0 +1,10 @@
+[user]
+	email = ntipakos@gmail.com
+	name = Vasilis Gkolemis
+[core]
+	editor = emacs -nw
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

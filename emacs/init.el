@@ -39,7 +39,7 @@
  '(font-use-system-font t)
  '(package-selected-packages
    (quote
-    (yasnippet-classic-snippets projectile pdf-tools magit py-autopep8 material-theme flycheck elpy ein better-defaults auctex))))
+    (nconc impatient-mode yasnippet-classic-snippets projectile pdf-tools magit py-autopep8 material-theme flycheck elpy ein better-defaults auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

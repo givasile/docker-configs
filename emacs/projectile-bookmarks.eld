@@ -1,1 +1,1 @@
-("~/projects/emacs-tmux-config/" "~/projects/test-git/")
+("~/projects/docker-configs/" "~/projects/cv/" "~/projects/test-git/")

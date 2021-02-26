@@ -3,14 +3,19 @@
 
 (defvar generalPackages
   '(
-    yasnippet
-    projectile
-    yasnippet-snippets
-    magit
+    use-package               ;; adds use-package macro for configuring packages in a tidy way
+    simple-httpd              ;; simple emacs web server
+    yasnippet                 ;; supports auto-complete snippets
+    yasnippet-snippets        ;; list of common snippets
+    projectile                ;; offers project-level manipulation (find etc)
+    magit                     ;; git inside emacs
+    markdown-mode             ;; edit markdowns from emacs
+    impatient-mode            ;; live-preview of html in the browser (built on top of simple-httpd)
     ))
 
+;; TODO add descriptions
 (defvar pythonPackages
-  '(better-defaults
+  '(better-defaults 
     ein
     elpy
     flycheck
@@ -20,42 +25,14 @@
 
 (defvar latexPackages
   '(
-    auctex
+    auctex ;; writing and formatting tex documents
     ))
 
+;; concatenate all packages to a list
+(setq allPackages (append generalPackages pythonPackages latexPackages))
 
 ;; install each package only if not installed already
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
-      generalPackages)
-
-;; install each package only if not installed already
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      pythonPackages)
-
-;; install each package only if not installed already
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      latexPackages)
-
-
-;; ; method to check if all packages are installed
-;; (defun packages-installed-p ()
-;;   (loop for p in required-packages
-;;         when (not (package-installed-p p)) do (return nil)
-;;         finally (return t)))
-
-;; ; if not all packages are installed, check one by one and install the missing ones.
-;; (unless (packages-installed-p)
-;;   ; check for new packages (package versions)
-;;   (message "%s" "Emacs is now refreshing its package database...")
-;;   (package-refresh-contents)
-;;   (message "%s" " done.")
-;;   ; install the missing packages
-;;   (dolist (p required-packages)
-;;     (when (not (package-installed-p p))
-;;       (package-install p))))
+      allPackages)

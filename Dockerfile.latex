@@ -1,89 +1,14 @@
 # Fully-customed latex working environment (TEX + GIT + EMACS + TMUX)
-# user id and gid must be defined at run time as arguments
-# TODO: ask username at runtime
+# emacs-base image + tex environment
 
 # pull base ubuntu image
-FROM ubuntu:20.04
-
-# args
-ARG USER_ID
-ARG GROUP_ID
-
-# Set environmental vars
-ENV HOME /home/givasile
-ENV TZ=Europe/Athens
-ENV DEBIAN_FRONTEND noninteractive
+FROM givasile/emacs-docker:latest
 
 # install apt-level packages
-RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf
+USER root
 RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get -y install git
-
-# set timezone
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# install software properties common - for adding kelleyk/emacs repo
-RUN apt-get install -y software-properties-common
-
-# install full tex
-RUN apt-get install texlive-full
-
-# install evince pdf reader
-RUN apt-get install -y evince \
-    curl \
-    fonts-powerline \
-    wget \
-    sudo
-
-# install emacs26 
-RUN add-apt-repository ppa:kelleyk/emacs
-RUN apt-get update
-RUN apt-get -y install emacs26
-
-# install tmux 
-RUN apt-get install tmux
-
-# install zsh
-RUN apt-get install zsh
-ENV TERM screen
-ENV ZSH_THEME agnoster
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-
-# install git lfs
-WORKDIR $HOME
-RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-RUN wget https://github.com/git-lfs/git-lfs/releases/download/v2.13.2/git-lfs-linux-amd64-v2.13.2.tar.gz
-RUN mkdir tmp1
-RUN tar -xf git-lfs-linux-amd64-v2.13.2.tar.gz -C ./tmp1
-RUN cd tmp1
-RUN ls -al
-RUN ./tmp1/install.sh
-RUN cd ..
-RUN rm -rf tmp1
-
-# add user
-RUN addgroup --gid $GROUP_ID givasile
-RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID givasile
-
-# copy/install all configs to $HOME
-WORKDIR /home/givasile
-COPY ./emacs $HOME/.emacs.d
-COPY ./tmux/.tmux.conf $HOME/
-COPY ./git/.gitconfig $HOME/
-# COPY ./ssh $HOME/.ssh
-RUN mkdir ~/.tmux/
-RUN mkdir ~/.tmux/plugins
-RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# chown -> user
-RUN chown -R givasile:givasile /home/givasile
+RUN apt-get upgrade
+RUN apt-get install git texlive-full
 USER givasile
 
-# set up git lfs
-RUN git lfs install
-
-# create project dir
-WORKDIR $HOME
-RUN mkdir project
-WORKDIR $HOME/project
+ENTRYPOINT ["/bin/zsh"]

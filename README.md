@@ -98,5 +98,9 @@ docker run -it \
 
 I normally use the alias `tex-docker`.
 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
+TODO:
 
+* find a workaround for opening content in local browser from inside the docker

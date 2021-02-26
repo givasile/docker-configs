@@ -50,7 +50,7 @@ docker run -it \
     --mount type=bind,source=`pwd`,target=/home/givasile/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
-    givasile/emacs-docker:latest'
+    givasile/emacs-docker:latest
 ```
 
 Normaly, I use the following alias inside .zshrc, for using it easily
@@ -61,7 +61,7 @@ alias emacs-docker = docker run -it \
     --mount type=bind,source=`pwd`,target=/home/givasile/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
-    givasile/emacs-docker:latest'
+    givasile/emacs-docker:latest
 ```
 
 Now, inside the directory you would like to edit something with emacs, just write `emacs-docker` and a fully functional emacs environment will be ready out-of-the-box.
@@ -80,7 +80,7 @@ Contains:
 Build command: (emacs-docker must have been built first)
 
 ```
-docker build -f ./Dockerfile.emacs -t givasile/emacs-docker
+docker build -f ./Dockerfile.emacs -t givasile/emacs-docker .
 ```
 
 TODO: if emacs-docker is not built already, ask for arguments and build it on the fly
@@ -93,7 +93,7 @@ docker run -it \
     --mount type=bind,source=`pwd`,target=/home/givasile/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
-    givasile/tex-docker:latest'
+    givasile/tex-docker:latest
 ```
 
 I normally use the alias `tex-docker`.

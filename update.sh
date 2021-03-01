@@ -2,6 +2,7 @@
 
 # copy Emacs configuration from current working configuration
 PREFIX=~/.emacs.d
+rm -rf emacs/*
 cp -R $PREFIX/* emacs
 rm -rf emacs/auto-save-list/
 

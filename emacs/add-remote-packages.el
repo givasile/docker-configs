@@ -7,10 +7,12 @@
     simple-httpd              ;; simple emacs web server
     yasnippet                 ;; supports auto-complete snippets
     yasnippet-snippets        ;; list of common snippets
+    company                   ;; auto-completion tool
     projectile                ;; offers project-level manipulation (find etc)
     magit                     ;; git inside emacs
     markdown-mode             ;; edit markdowns from emacs
     impatient-mode            ;; live-preview of html in the browser (built on top of simple-httpd)
+    flycheck                  ;; on-the-fly checker (uses many backends, depending on the language)
     ))
 
 ;; TODO add descriptions
@@ -18,7 +20,6 @@
   '(better-defaults 
     ein
     elpy
-    flycheck
     material-theme
     py-autopep8
     ))

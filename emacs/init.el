@@ -9,11 +9,15 @@
 (load "~/.emacs.d/add-remote-packages.el") ;; loads specific packages
 (load "~/.emacs.d/add-local-packages.el") ;; loads packages downloaded manualy
 
+;; run cofiguration for general packages
+(load "~/.emacs.d/config-general.el") ;; configs python
+
 ;; run cofiguration for python - ELPy dependent configurations
-(load "~/.emacs.d/config-elpy.el") ;; configs python
+(load "~/.emacs.d/config-python.el") ;; configs python
 
 ;; run configuration for latex
 (load "~/.emacs.d/config-latex.el") ;; configs auctex
+
 
 
 ;; Configs at by Emacs-Gui

@@ -1,30 +1,18 @@
 # docker-configs
 
-This repo contains:
+This repo contains the follow ready-to-build and use docker set-ups:
 
-* my favourite configurations for emacs, tmux, zsh
-* some dockerfiles for building development environments using (a) these configurations + (b) others utilities
-
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
-**Configuration:**
-
-* emacs: 
+* emacs-docker
+* tex-docker
 
 -------------------------------------------------------------------------------
--------------------------------------------------------------------------------
 
-**emacs-docker:**
+**emacs-docker:** A ready-to-build environment with
 
-Emacs docker is the basis container, offering the following utilities:
-
-* zsh, oh-my-zsh, fonts-powerline
-* emacs26, tmux
+* emacs26 - with my favourite plug-ins
+* tmux, zsh, oh-my-zsh, fonts-powerline
 * git, git-lfs
-* sudo, 
 * wget, curl
-* evince
 
 Build command: (must be run inside Dockerfile.emacs directory)
 
@@ -32,8 +20,7 @@ Build command: (must be run inside Dockerfile.emacs directory)
 docker build -f ./Dockerfile.emacs -t givasile/emacs-docker \
     --build-arg USER_ID=$(id -u) \
     --build-arg GROUP_ID=$(id -g) \
-    --build-arg USER=$(whoami) \
-.
+    --build-arg USER=$(whoami) .
 ```
 Default arguments:
 
@@ -45,20 +32,20 @@ Default arguments:
 Run command: 
 
 ```
-docker run -it \
-    --mount type=bind,source=/home/givasile/.ssh,target=/home/givasile/.ssh \
-    --mount type=bind,source=`pwd`,target=/home/givasile/project \
+docker run -it --rm \
+    --mount type=bind,source=/home/$USER/.ssh,target=/home/$USER/.ssh \
+    --mount type=bind,source=`pwd`,target=/home/$USER/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
     givasile/emacs-docker:latest
 ```
 
-Normaly, I use the following alias inside .zshrc, for using it easily
+Normaly, I create an alias to `emacs-docker` command, by adding the following snippet at the .bashrc 
 
 ```
-alias emacs-docker = docker run -it \
-    --mount type=bind,source=/home/givasile/.ssh,target=/home/givasile/.ssh \
-    --mount type=bind,source=`pwd`,target=/home/givasile/project \
+alias emacs-docker = docker run -it --rm \
+    --mount type=bind,source=/home/$USER/.ssh,target=/home/$USER/.ssh \
+    --mount type=bind,source=`pwd`,target=/home/$USER/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
     givasile/emacs-docker:latest
@@ -67,20 +54,13 @@ alias emacs-docker = docker run -it \
 Now, inside the directory you would like to edit something with emacs, just write `emacs-docker` and a fully functional emacs environment will be ready out-of-the-box.
 
 -------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-**tex-docker**
 
-tex-docker = emacs-docker + texlive-full
-
-Contains: 
-
-* emacs-docker
-* latex environment
+**tex-docker** = emacs-docker + texlive-full
 
 Build command: (emacs-docker must have been built first)
 
 ```
-docker build -f ./Dockerfile.emacs -t givasile/emacs-docker .
+docker build -f ./Dockerfile.latex -t givasile/tex-docker --build-arg USER=$(whoami) .
 ```
 
 TODO: if emacs-docker is not built already, ask for arguments and build it on the fly
@@ -89,8 +69,8 @@ Run command:
 
 ```
 docker run -it \
-    --mount type=bind,source=/home/givasile/.ssh,target=/home/givasile/.ssh \
-    --mount type=bind,source=`pwd`,target=/home/givasile/project \
+    --mount type=bind,source=/home/$USER/.ssh,target=/home/$USER/.ssh \
+    --mount type=bind,source=`pwd`,target=/home/$USER/project \
     --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
     -e DISPLAY="unix$DISPLAY" \
     givasile/tex-docker:latest
@@ -98,7 +78,6 @@ docker run -it \
 
 I normally use the alias `tex-docker`.
 
--------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
 TODO:

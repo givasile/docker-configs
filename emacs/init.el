@@ -1,40 +1,35 @@
-;; init.el --- Emacs configuration
+;;; init.el --- Emacs configuration
+;;; Commentary:
+;; First script executed when starting Emacs
 
-;; load all internal configs - hook makes sure they run last
+;;; Code:
+;; add internal configs in after-init-hook to make sure it runs last
 (add-hook 'after-init-hook '(lambda ()
   (load "~/.emacs.d/config-internals.el")
 ))
 
-(load "~/.emacs.d/add-repos.el") ;; loads additional package managers
-(load "~/.emacs.d/add-remote-packages.el") ;; loads specific packages
-(load "~/.emacs.d/add-local-packages.el") ;; loads packages downloaded manualy
+;; loads additional package managers
+(load "~/.emacs.d/add-repos.el")
 
-;; run cofiguration for general packages
-(load "~/.emacs.d/config-general.el") ;; configs python
+;; loads remote packages (through package manager)
+(load "~/.emacs.d/add-remote-packages.el")
+
+;; loads packages downloaded manualy
+(load "~/.emacs.d/add-local-packages.el")
+
+;; runs cofiguration for general packages
+(load "~/.emacs.d/config-general.el")
 
 ;; run cofiguration for python - ELPy dependent configurations
 (load "~/.emacs.d/config-python.el") ;; configs python
 
-;; run configuration for latex
+;; run configuration for latex (and in general text-based documents)
 (load "~/.emacs.d/config-latex.el") ;; configs auctex
 
+;; run configuration for latex (and in general text-based documents)
+(load "~/.emacs.d/config-docker.el") ;; configs auctex
 
-
-;; Configs at by Emacs-Gui
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(package-selected-packages
-;;    (quote
-;;     (auctex py-autopep8 material-theme flycheck elpy ein better-defaults yasnippet))))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
+;; Configs added by Emacs-Gui - added when you change something interactively from the menu
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,8 +37,8 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(package-selected-packages
-   (quote
-    (nconc impatient-mode yasnippet-classic-snippets projectile pdf-tools magit py-autopep8 material-theme flycheck elpy ein better-defaults auctex))))
+	 (quote
+		(docker yasnippet-snippets use-package py-autopep8 projectile pdf-tools material-theme markdown-mode magit impatient-mode flycheck elpy ein csv-mode better-defaults auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -24,7 +24,8 @@ RUN apt-get install git \
     wget \
     sudo \
     tmux \
-    zsh
+    zsh \
+		chromium-browser
 
 # install emacs26 
 RUN add-apt-repository ppa:kelleyk/emacs
@@ -37,12 +38,8 @@ ARG GROUP_ID=1000
 ARG USER=givasile
 ARG HOME=/home/$USER
 
-# Set environmental vars
-ENV TERM screen
-ENV ZSH_THEME agnoster
-
-# install oh-my-zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+# install oh-my-zsh (with helping script from https://github.com/deluan/zsh-in-docker)
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)"
 
 # install git lfs
 WORKDIR $HOME
@@ -60,6 +57,10 @@ RUN rm -rf tmp1
 # add user
 RUN addgroup --gid $GROUP_ID $USER
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID $USER
+RUN adduser $USER sudo
+
+# disable sudo password for all users
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # copy/install all configs to $HOME
 WORKDIR $HOME

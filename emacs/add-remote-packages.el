@@ -11,6 +11,7 @@
     projectile                ;; offers project-level manipulation (find etc)
     magit                     ;; git inside emacs
     markdown-mode             ;; edit markdowns from emacs
+		csv-mode                  ;; edit csv from emacs
     impatient-mode            ;; live-preview of html in the browser (built on top of simple-httpd)
     flycheck                  ;; on-the-fly checker (uses many backends, depending on the language)
     ))

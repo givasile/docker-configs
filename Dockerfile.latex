@@ -4,11 +4,13 @@
 # pull base ubuntu image
 FROM givasile/emacs-docker:latest
 
+ARG USER
+
 # install apt-level packages
 USER root
 RUN apt-get update
 RUN apt-get upgrade
 RUN apt-get install git texlive-full
-USER givasile
+USER $USER
 
 ENTRYPOINT ["/bin/zsh"]

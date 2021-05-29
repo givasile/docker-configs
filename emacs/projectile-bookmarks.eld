@@ -1,1 +1,1 @@
-("~/projects/docker-configs/" "~/projects/PMR/" "~/projects/test-git/" "~/projects/cv/")
+("~/projects/docker-configs/" "~/ATHENA/i4metal/" "~/projects/givasile.github.io/" "~/projects/notebooks/" "~/.pyenv/" "~/projects/edinburgh-thesis/" "~/projects/test_mlflow/mlflow/" "~/docker-projects/superset/" "~/projects/PMR/" "~/projects/test-git/" "~/projects/cv/")

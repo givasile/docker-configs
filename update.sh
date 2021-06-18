@@ -11,3 +11,6 @@ cp ~/.tmux.conf tmux/
 
 # copy git configuration from current working configuration
 cp ~/.gitconfig git/
+
+# copy powerlevel10k configuration from current working configuration
+cp ~/.p10k.zsh powerlevel10k/

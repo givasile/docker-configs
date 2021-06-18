@@ -14,6 +14,7 @@
 		csv-mode                  ;; edit csv from emacs
     impatient-mode            ;; live-preview of html in the browser (built on top of simple-httpd)
     flycheck                  ;; on-the-fly checker (uses many backends, depending on the language)
+		nord-theme                ;; nice theme from https://github.com/arcticicestudio/nord-emacs
     ))
 
 ;; TODO add descriptions

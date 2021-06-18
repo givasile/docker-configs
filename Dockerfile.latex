@@ -8,9 +8,7 @@ ARG USER
 
 # install apt-level packages
 USER root
-RUN apt-get update
-RUN apt-get upgrade
-RUN apt-get install git texlive-full
+RUN apt-get install texlive-full
 USER $USER
 
 ENTRYPOINT ["/bin/zsh"]

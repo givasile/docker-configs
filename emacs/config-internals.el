@@ -46,7 +46,10 @@ With a prefix argument, insert a newline above the current line."
 ;; (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
+
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes/")) ;; add path where nord-emacs theme is stored
+(load-theme 'nord t) ;; load material theme
+
 (global-linum-mode t) ;; enable line numbers globally
 (setq show-paren-style 'mixed) ;; highlight brackets if visible, else entire expression
 (electric-pair-mode 1) ;; insert closing bracket, when opening one

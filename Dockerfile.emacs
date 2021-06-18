@@ -11,12 +11,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV DEBIAN_FRONTEND noninteractive
 
 # install apt-level packages
-RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf
-RUN apt-get update
-RUN apt-get upgrade
-
-# install packages
-RUN apt-get install git \
+RUN echo 'APT::Get::Assume-Yes "true";' >> /etc/apt/apt.conf &&\
+		apt-get update &&\
+		apt-get upgrade &&\
+		apt-get install git \
     software-properties-common \
     evince \
     curl \
@@ -25,12 +23,10 @@ RUN apt-get install git \
     sudo \
     tmux \
     zsh \
-		chromium-browser
-
-# install emacs26 
-RUN add-apt-repository ppa:kelleyk/emacs
-RUN apt-get update
-RUN apt-get -y install emacs26
+		chromium-browser &&\
+		add-apt-repository ppa:kelleyk/emacs &&\
+		apt-get update &&\
+		apt-get -y install emacs26
 
 # args
 ARG USER_ID=1000
@@ -38,39 +34,38 @@ ARG GROUP_ID=1000
 ARG USER=givasile
 ARG HOME=/home/$USER
 
-# install oh-my-zsh (with helping script from https://github.com/deluan/zsh-in-docker)
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)"
+# install oh-my-zsh and powerlevel10k - TODO check why pluggins do not work
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+    -p git &&\
+		echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> ~/.zshrc # sources .p10k.zsh script in the end
 
 # install git lfs
 WORKDIR $HOME
-RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-RUN wget https://github.com/git-lfs/git-lfs/releases/download/v2.13.2/git-lfs-linux-amd64-v2.13.2.tar.gz
-RUN mkdir tmp1
-RUN tar -xf git-lfs-linux-amd64-v2.13.2.tar.gz -C ./tmp1
-RUN rm git-lfs-linux-amd64-v2.13.2.tar.gz
-RUN cd tmp1
-RUN ls -al
-RUN ./tmp1/install.sh
-RUN cd ..
-RUN rm -rf tmp1
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash &&\
+		wget https://github.com/git-lfs/git-lfs/releases/download/v2.13.2/git-lfs-linux-amd64-v2.13.2.tar.gz &&\
+		mkdir tmp1 &&\
+		tar -xf git-lfs-linux-amd64-v2.13.2.tar.gz -C ./tmp1 &&\
+		rm git-lfs-linux-amd64-v2.13.2.tar.gz &&\
+		tmp1/install.sh &&\
+		rm -rf tmp1
 
 # add user
-RUN addgroup --gid $GROUP_ID $USER
-RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID $USER
-RUN adduser $USER sudo
+RUN addgroup --gid $GROUP_ID $USER &&\
+		adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID $USER &&\
+		adduser $USER sudo &&\
+		echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# disable sudo password for all users
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-# copy/install all configs to $HOME
+# copy static configurations for emacs, tmux, git
 WORKDIR $HOME
 COPY ./emacs $HOME/.emacs.d
 COPY ./tmux/.tmux.conf $HOME/
 COPY ./git/.gitconfig $HOME/
-# COPY ./ssh $HOME/.ssh
-RUN mkdir ~/.tmux/
-RUN mkdir ~/.tmux/plugins
-RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+COPY ./powerlevel10k/.p10k.zsh $HOME/
+
+# install static configurations for emacs, tmux, git
+RUN mkdir ~/.tmux/ &&\
+		mkdir ~/.tmux/plugins &&\
+		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # chown -> user
 RUN chown -R $USER:$USER $HOME

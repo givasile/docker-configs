@@ -30,18 +30,18 @@
 (load "~/.emacs.d/config-docker.el") ;; configs auctex
 
 ;; Configs added by Emacs-Gui - added when you change something interactively from the menu
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-use-system-font t)
- '(package-selected-packages
-	 (quote
-		(docker yasnippet-snippets use-package py-autopep8 projectile pdf-tools material-theme markdown-mode magit impatient-mode flycheck elpy ein csv-mode better-defaults auctex))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Inconsolata" :foundry "PfEd" :slant normal :weight normal :height 128 :width normal)))))
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(font-use-system-font t)
+;;  '(package-selected-packages
+;; 	 (quote
+;; 		(docker yasnippet-snippets use-package py-autopep8 projectile pdf-tools material-theme markdown-mode magit impatient-mode flycheck elpy ein csv-mode better-defaults auctex))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:family "Inconsolata" :foundry "PfEd" :slant normal :weight normal :height 128 :width normal)))))

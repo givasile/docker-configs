@@ -29,17 +29,17 @@
 ;; (load "~/.emacs.d/givasile/universal/config-nano.el")
 
 
-;; configuration dependent on local configuration
-;; ___________________________________________________________
+;; ;; configuration dependent on local configuration
+;; ;; ___________________________________________________________
 
-;; loads packages downloaded manualy
-(load "~/.emacs.d/givasile/dependent_on_local_pc/add-local-packages.el")
+;; ;; loads packages downloaded manualy
+;; (load "~/.emacs.d/givasile/dependent_on_local_pc/add-local-packages.el")
 
-;; run configuration for org-mode
-(load "~/.emacs.d/givasile/dependent_on_local_pc/config-org.el") ;; configs org-mode
+;; ;; run configuration for org-mode
+;; (load "~/.emacs.d/givasile/dependent_on_local_pc/config-org.el") ;; configs org-mode
 
-;; run configuration for mu4e
-(load "~/.emacs.d/givasile/dependent_on_local_pc/config-mu4e.el") ;; configs org-mode
+;; ;; run configuration for mu4e
+;; (load "~/.emacs.d/givasile/dependent_on_local_pc/config-mu4e.el") ;; configs org-mode
 
 
 (provide 'init-local)

@@ -1,1 +1,1 @@
-("~/projects/docker-configs/")
+("~/projects/docker-configs/" "~/.emacs.d/" "~/org/" "~/projects/i4metal/" "~/projects/ROMC-SW/" "~/projects/elfi/" "~/.emacs.d/straight/repos/mu4e-dashboard/" "~/.emacs.d/straight/repos/nano-emacs/" "~/.pyenv/")

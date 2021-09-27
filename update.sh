@@ -5,6 +5,8 @@ PREFIX=~/.emacs.d
 rm -rf emacs/*
 cp -R $PREFIX/* emacs
 rm -rf emacs/auto-save-list/
+rm -rf emacs/.git
+rm -rf emacs/straight/
 
 # copy tmux configuration from current working configuration
 cp ~/.tmux.conf tmux/
